@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estadísticas de la Página</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <header>
+        <h1>Estadísticas generales de </h1>
+    </header>
+    <p>Número de títulos: <%= info.CantTitulos %></p>
+    <p>Cantidad de palabras usando stemming: <%= info.CantPalabrasStemming %> </p>
+    <p>Cantidad de palabras usando stemming para titulos: <%= info.CantPalabrasStemmingTitulos %> </p>
+    <p>Cantidad de referencias: <%= info.CantRefs %> </p>
+    <p>Cantidad de veces que se usa cada referencia en el texto: </p>
+    <ul class="referencias">
+        <% references.forEach(function(reference) { %>
+            <li>Referencia: <%= reference.link %>, cantidad de veces que se usa: <%= reference.CantUsado%></li>
+        <% }); %> 
+    </ul>    
+    <p>Cantidad de imagenes que tienen ALT: <%= info.CantAlt %> </p>
+    <p>Cantidad de imagenes diferentes usando stemming: <%= info.CantImgStem %> </p>
+    <p>Top 10 palabras mas comunes en la pagina, y si son parte del titulo o no: </p>
+    <ul class="referencias">
+        <% comunes.forEach(function(comunes) { %>
+            <%let string = "No"%>
+            <% if (comunes.inTitulo === 1) {string = "Si"} %>
+            <li>Palabra: <%= comunes.palabra %>, cantidad de veces que aparece: <%= comunes.cantAparece%>, es parte del titulo? <%= string %></li>
+        <% }); %> 
+    </ul> 
+    
+    
+    
+</body>
+</html>

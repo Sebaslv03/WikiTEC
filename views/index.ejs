@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buscador de Palabras</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <header>
+        <h1>Buscador de Palabras en Textos</h1>
+    </header>
+
+    <main>
+        <form>
+        <section class="search-container">
+            <input type="text" id="searchInput" name="searchInput" placeholder="Escribe las palabras a buscar...">
+            <button id="searchButton" formaction="/searchWord" formmethod="post">Buscar</button>
+        </section>
+        </form>
+        <h2>Estadísticas generales</h2>
+        <p>Paginas consultadas: 7890</p>
+        <p>Espacio consumido: 1,7gb</p>
+
+
+        <section id="resultsSection">
+            <h2>Resultados</h2>
+            <% urls.forEach(function(url) { %>
+                <form>
+                <% let string = url.porcentajetags %>
+                <% for (let key in string) { if (string.hasOwnProperty(key)) { string[key] = parseFloat((string[key] * 100).toFixed(2)); } } %>
+                <%= url.palabras %> : <button class="button" formaction="/infoUrl" formmethod="post"><%=url.url%></button> cantidad de veces que aparece: <%= url.cant %> porcentaje: <%= (url.porcentaje *10).toString().slice(0, 4) %>, porcentaje de tags: <%= JSON.stringify(string).slice(1, (JSON.stringify(string).length - 1)) %><br>
+                <input type="text" name="urlUnico" value="<%= url.url%>" hidden>
+                </form>
+            <% }); %> 
+            <div id="results"></div>
+        </section>
+        
+    </main>
+</body>
+</html>
